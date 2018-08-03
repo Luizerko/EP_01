@@ -1,1 +1,38 @@
+//Codigo versao interativa EP_01
 
+#include <stdio.h>
+#include <stdlib.h>
+
+void collatz(int entrada, int *contador)
+{
+    while(entrada != 1)
+    {
+        if(entrada%2 == 0)
+        {
+            *contador = *contador + 1;
+            entrada = entrada/2;
+        }
+        else
+        {
+            *contador = *contador + 1;
+            entrada = (3*entrada) + 1;
+        }
+    }
+    return 0;
+}
+
+int main()
+{
+    int i, j, passos = 0;
+    int *contador = &passos;
+    printf("Entre com o numero incial e o final do intervalo respectivamente:\n");
+    scanf("%d %d", &i, &j);
+    while(i != j)
+    {
+        collatz(i, contador);
+        printf("%d\n", *contador);
+        *contador = 0;
+        i++;
+    }
+    return 0;
+}
