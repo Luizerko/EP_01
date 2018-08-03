@@ -1,0 +1,44 @@
+//Codigo recursivo para solucionar o EP_01
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void collatz(int entrada, int *inicio, int *fim, int *contador)
+{
+    if(entrada%2 != 0)
+    {
+        if(entrada == 1)
+        {
+            printf("%d\n", *contador);
+            *contador = 0;
+            if(*inicio != (*fim - 1))
+            {
+                *inicio = *inicio + 1;
+                collatz(*inicio, inicio, fim, contador);
+            }
+            exit(0);
+        }
+        else
+        {
+            *contador = *contador + 1;
+            entrada = 3*entrada + 1;
+            collatz(entrada, inicio, fim, contador);
+        }
+    }
+    else
+    {
+        *contador = *contador + 1;
+        entrada = entrada/2;
+        collatz(entrada, inicio, fim, contador);
+    }
+}
+
+int main()
+{
+    int i, j, passos = 0;
+    int *contador = &passos;
+    printf("Entre com o numero incial e o final do intervalo respectivamente:\n");
+    scanf("%d %d", &i, &j);
+    collatz(i, &i, &j, contador);
+    return 0;
+}
