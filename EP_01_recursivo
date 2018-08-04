@@ -9,9 +9,9 @@ void collatz(int entrada, int *inicio, int *fim, int *contador)
     {
         if(entrada == 1)
         {
-            printf("%d\n", *contador);
+            printf("%u\n", *contador);
             *contador = 0;
-            if(*inicio != (*fim - 1))
+            if(*inicio != *fim)
             {
                 *inicio = *inicio + 1;
                 collatz(*inicio, inicio, fim, contador);
@@ -20,8 +20,8 @@ void collatz(int entrada, int *inicio, int *fim, int *contador)
         }
         else
         {
-            *contador = *contador + 1;
-            entrada = 3*entrada + 1;
+            *contador = *contador + 2;
+            entrada = (3*entrada + 1)/2;
             collatz(entrada, inicio, fim, contador);
         }
     }
@@ -35,10 +35,10 @@ void collatz(int entrada, int *inicio, int *fim, int *contador)
 
 int main()
 {
-    int i, j, passos = 0;
-    int *contador = &passos;
+    unsigned int i, f, passos = 0;
+    unsigned int *contador = &passos;
     printf("Entre com o numero incial e o final do intervalo respectivamente:\n");
-    scanf("%d %d", &i, &j);
-    collatz(i, &i, &j, contador);
+    scanf("%u %u", &i, &f);
+    collatz(i, &i, &f, contador);
     return 0;
 }
