@@ -7,15 +7,15 @@ void collatz(int entrada, int *contador)
 {
     while(entrada != 1)
     {
-        if(entrada%2 == 0)
-        {
-            *contador = *contador + 1;
-            entrada = entrada/2;
-        }
-        else
+        while(entrada%2 != 0)
         {
             *contador = *contador + 2;
             entrada = ((3*entrada) + 1)/2;
+        }
+        while(entrada%2 == 0)
+        {
+            *contador = *contador + 1;
+            entrada = entrada/2;
         }
     }
     return 0;
