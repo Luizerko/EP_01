@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void collatz(int entrada, int *contador)
+void collatz(unsigned int entrada, unsigned int *contador)
 {
     while(entrada != 1)
     {
@@ -23,14 +23,14 @@ void collatz(int entrada, int *contador)
 
 int main()
 {
-    int i, j, passos = 0;
-    int *contador = &passos;
+    unsigned int i, j, passos = 0;
+    unsigned int *contador = &passos;
     printf("Entre com o numero incial e o final do intervalo respectivamente:\n");
-    scanf("%d %d", &i, &j);
+    scanf("%u %u", &i, &j);
     while(i != j)
     {
         collatz(i, contador);
-        printf("%d\n", *contador);
+        printf("%u\n", *contador);
         *contador = 0;
         i++;
     }
