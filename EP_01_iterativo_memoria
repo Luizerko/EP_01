@@ -35,9 +35,8 @@ int main()
     unsigned int i, f, passos = 0;
     unsigned int *contador = &passos;
     printf("Entre com o numero incial e o final do intervalo respectivamente:\n");
-    i=1;
-    f=100000;
-    unsigned int memoria[100000];
+    scanf("%u %u", &i, &f);
+    unsigned int memoria[f];
     while(i != (f+1))
     {
         collatz(i, memoria, contador);
