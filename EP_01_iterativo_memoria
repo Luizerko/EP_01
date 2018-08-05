@@ -1,0 +1,50 @@
+//EP resolvido atraves do metodo iterativo, mas com utilizacao de memoria para otimizacao
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void collatz(unsigned int entrada, unsigned int memoria[], unsigned int *contador)
+{
+    unsigned int inicio = entrada;
+    while(entrada != 1)
+    {
+        if(entrada < inicio)
+        {
+            *contador = *contador + memoria[entrada];
+            entrada = 1;
+        }
+        else
+        {
+            while(entrada%2 != 0)
+            {
+                *contador = *contador + 2;
+                entrada = ((3*entrada) + 1)/2;
+            }
+            while(entrada%2 == 0)
+            {
+                *contador = *contador + 1;
+                entrada = entrada/2;
+            }
+        }
+    }
+    return 0;
+}
+
+int main()
+{
+    unsigned int i, f, passos = 0;
+    unsigned int *contador = &passos;
+    printf("Entre com o numero incial e o final do intervalo respectivamente:\n");
+    i=1;
+    f=100000;
+    unsigned int memoria[100000];
+    while(i != (f+1))
+    {
+        collatz(i, memoria, contador);
+        printf("%u\n", *contador);
+        memoria[i] = *contador;
+        *contador = 0;
+        i++;
+    }
+    return 0;
+}
