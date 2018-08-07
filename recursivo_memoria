@@ -1,0 +1,66 @@
+//EP otimizado recursivo com vetor de memória limitado
+
+#include <stdio.h>
+#include <stdlib.h>
+unsigned int vetor[100000000];
+
+unsigned int collatz(unsigned int entrada, unsigned int vetor_passos[])
+{
+    unsigned int saida;
+    if(entrada%2 != 0)
+    {
+        if(entrada == 1)
+        {
+            return 0;
+        }
+        else
+        {
+            saida = 3*entrada + 1;
+            if(entrada > 100000000)
+            {
+                return collatz(saida, vetor_passos) + 1;
+            }
+            if(vetor_passos[entrada] == -1)
+            {
+                return vetor_passos[entrada] = collatz(saida, vetor_passos) + 1;
+            }
+            else
+            {
+                return vetor_passos[entrada];
+            }
+        }
+    }
+    else
+    {
+        saida = entrada/2;
+        if(entrada > 100000000)
+            {
+                return collatz(saida, vetor_passos) + 1;
+            }
+        if(vetor_passos[entrada] == -1)
+        {
+            return vetor_passos[entrada] = collatz(saida, vetor_passos) + 1;
+        }
+        else
+        {
+            return vetor_passos[entrada];
+        }
+    }
+}
+
+int main()
+{
+    unsigned int i, f, j;
+    for(j = 0; j < 100000000; j++)
+    {
+        vetor[j] = -1;
+    }
+    printf("Entre com o numero incial e o final do intervalo respectivamente:\n");
+    scanf("%u %u", &i, &f);
+    while(i <= f)
+    {
+        printf("%u\n", collatz(i, vetor));
+        i++;
+    }
+    return 0;
+}
