@@ -1,0 +1,67 @@
+//EP_01 recursivo com memoria alocada dinamicamente
+
+#include <stdio.h>
+#include <stdlib.h>
+
+unsigned int collatz(unsigned int entrada, unsigned int fim, unsigned int vetor_passos[])
+{
+    unsigned int saida;
+    if(entrada%2 != 0)
+    {
+        if(entrada == 1)
+        {
+            return 0;
+        }
+        else
+        {
+            saida = 3*entrada + 1;
+            if(entrada > fim)
+            {
+                return collatz(saida, fim, vetor_passos) + 1;
+            }
+            if(vetor_passos[entrada] == -1)
+            {
+                return vetor_passos[entrada] = collatz(saida, fim, vetor_passos) + 1;
+            }
+            else
+            {
+                return vetor_passos[entrada];
+            }
+        }
+    }
+    else
+    {
+        saida = entrada/2;
+        if(entrada > fim)
+            {
+                return collatz(saida, fim, vetor_passos) + 1;
+            }
+        if(vetor_passos[entrada] == -1)
+        {
+            return vetor_passos[entrada] = collatz(saida, fim, vetor_passos) + 1;
+        }
+        else
+        {
+            return vetor_passos[entrada];
+        }
+    }
+}
+
+int main()
+{
+    unsigned int i, f, j;
+    unsigned int *vetor;
+    printf("Entre com o numero incial e o final do intervalo respectivamente:\n");
+    scanf("%u %u", &i, &f);
+    vetor = malloc((f+1)*sizeof(unsigned int));
+    for(j = 0; j < (f+1); j++)
+    {
+        vetor[j] = -1;
+    }
+    while(i <= f)
+    {
+        collatz(i, f, vetor);
+        i++;
+    }
+    return 0;
+}
